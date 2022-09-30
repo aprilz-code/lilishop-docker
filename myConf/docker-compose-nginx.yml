@@ -1,0 +1,25 @@
+version: "3"
+services: 
+  nginx:
+    image:  nginx:alpine
+    restart:  always
+    ports:
+      - "80:80"
+      - "443:443"
+    networks: 
+      - stack
+    volumes:
+      - /mydata/config/nginx/conf/conf.d:/etc/nginx/conf.d # 相关server测试文件
+      - /mydata/config/nginx/nginx.conf:/etc/nginx/nginx.conf  # 主配置文件
+      - /mydata/config/nginx/log:/var/log/nginx  # log日志
+      - /mydata/config/nginx/wwww:/var/www
+      - /mydata/config/nginx/html:/usr/share/nginx/html # html文件
+      - /mydata/config/nginx/cert:/etc/nginx/cert  #证书
+
+networks: 
+  stack:
+    driver: bridge
+
+
+
+
